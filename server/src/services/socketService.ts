@@ -797,7 +797,6 @@ const handleLeaveGroupChat = (socket: CustomSocket, groupId: string) => {
   
 };
 
-// Note: Removed debounce tracking for markGroupMessagesAsRead to prevent race conditions
 
 // Handle marking group messages as read
 const handleMarkGroupMessagesAsRead = async (io: Server, socket: CustomSocket, data: { groupId: string }) => {
@@ -805,7 +804,7 @@ const handleMarkGroupMessagesAsRead = async (io: Server, socket: CustomSocket, d
     
     const userObjectId = new mongoose.Types.ObjectId(socket.userId);
     
-    // Immediate database operation - no debounce
+  
     const result = await Group.updateOne(
       {
         _id: data.groupId,

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-const API_URL = import.meta.env.VITE_API_URL;
+import { AUTH_ENDPOINTS } from '../constants/apiEndpoints';
 
 interface User {
   id: string;
@@ -67,9 +67,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // Helper function to make auth API calls
-   
   const makeAuthRequest = async (endpoint: string, body: any) => {
-    const response = await fetch(`${API_URL}/api/auth/${endpoint}`, {
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -80,7 +79,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || `${endpoint} failed`);
+      throw new Error(data.message || 'Authentication failed');
     }
 
     return data;
@@ -108,7 +107,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Clear any existing tokens first
       clearAuthData();
       
-      const data = await makeAuthRequest('login', { email, password });
+      const data = await makeAuthRequest(AUTH_ENDPOINTS.LOGIN, { email, password });
       saveAuthData(data.token, data.user);
     } catch (error) {
       // Clear tokens on error
@@ -122,7 +121,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // Clear any existing tokens first
       clearAuthData();
       
-      const data = await makeAuthRequest('register', { username, email, password });
+      const data = await makeAuthRequest(AUTH_ENDPOINTS.REGISTER, { username, email, password });
       saveAuthData(data.token, data.user);
     } catch (error) {
       // Clear tokens on error

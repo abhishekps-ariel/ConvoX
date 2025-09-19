@@ -64,9 +64,6 @@ const LeftSidebar = forwardRef<{
   // Local groups state (EXACT same pattern as conversations)
   const [groups, setGroups] = useState<GroupWithUnread[]>([]);
   
-  // Note: Removed debounce tracking as it was causing issues
-  
-
   // Set up refs for socket access
   useEffect(() => {
     selectedGroupRef.current = selectedGroup;

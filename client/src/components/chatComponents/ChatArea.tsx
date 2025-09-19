@@ -343,7 +343,8 @@ const ChatArea: React.FC<ChatAreaProps> = ({
     } else if (!selectedUser) {
       setMessages([]);
     }
-  }, [selectedGroup, token, logout, setMessages, selectedUser, markGroupMessagesAsRead, messages, user?.id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedGroup, token, logout, setMessages, selectedUser]);
 
   // Handle socket emit for marking messages as read
   useEffect(() => {
