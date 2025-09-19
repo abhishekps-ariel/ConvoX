@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    // Module and target
+    "target": "ES2020",               // Modern JS output
+    "module": "NodeNext",             // Works with package.json "type": "module"
+    "moduleResolution": "NodeNext",       // Resolves node_modules correctly
+    // Type checking
+    "strict": true,                   // Enable all strict checks
+    "esModuleInterop": true,          // Allows default imports from commonjs
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,             // Skip type checking of libraries
+    "isolatedModules": true,          // Required for ts-node and ESM
+
+    // Node types
+    "types": ["node"],                // Allows 'process', __dirname, etc.
+
+    // Output & source maps
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
